@@ -103,31 +103,32 @@ class App extends React.Component{
     try{
       await removeCarro(idCarro);
 
-      await this.LoadCarros();
+      
     }catch(erro){
       this.setState({
         errorMessage: erro.tostring()
-
+        
       });
-      console.error("Erro ao submeter os dados do novo carro", erro)
+      console.error("Erro ao submeter os dados do novo carro", erro);
 
     }
-    window.location.reload();
+    await this.LoadCarros();
   }
-  handlerDadosForm = async (dadosdoFormulario) => {
+  handlerDadosForm = async (newcarro) => {
 
 
     try {
-      await addCarro(dadosdoFormulario);
+      await addCarro(newcarro);
 
       //Ponto 3
-      await this.LoadCarros();
+      
     } catch (erro) {
       this.setState({
         errorMessage: erro.toString()
       });
       console.error("Erro ao submeter os dados do novo Carro; ", erro)
     }
+    await this.LoadCarros();
     window.location.reload();
   }
 
@@ -145,18 +146,18 @@ class App extends React.Component{
       case "sucesso":
         return (
           <div className="container">
-            <h1>Fotografias dos Carros</h1>
+            <h1>Fotografia do Carro</h1>
             {/* adição do Formulário que há-de recolher os dados da nova fotografia */}
             <Formulario inDadosCarros={car} outDadosFotos={this.handlerDadosForm} />
 
             <div className="row">
               <div className="col-md-20">
                 <hr />
-                <h3>Tabela com os Filmes</h3>
+                <h3>Tabela com os Carros</h3>
                 {/* Tabela5 tem um 'parâmetro de entrada', chamado 'inDadosFotos'.
                 Neste caso, está a receber o array JSON com os dados das fotos dos carros,
                 lidos da API */}
-                <Tabela inDadosCarros={carro} filmes={this.handlerRemoveCarro} />
+                <Tabela inDadosCarros={car} carros={this.handlerRemoveCarro} />
               </div>
             </div>
           </div>

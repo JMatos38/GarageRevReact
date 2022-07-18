@@ -32,29 +32,22 @@ const CorpoTabela = (props) => {
     // os objetos definidos dentro do array 'dadosDosFilmes'
     const rows = props.dadosDosCarros.map((row) => {
         return (
-            <tr key={row.idCarros}>
-                {/* <td>{row.idFilmes}</td> */}
-                <td style={{textAlign:'center'}}><br></br><br></br>{row.titulo}</td>
-                <td style={{textAlign:'center'}}><img src={'fotos/' + row.capa}
-                    alt={'foto do ' + row.foto}
+            <tr key={row.id}>
+                <td>{row.marca}</td>
+                <td>{row.modelo}</td>
+                <td>{row.versao}</td>
+                <td>{row.ano}</td>
+                <td>{row.combustivel}</td>
+                <td>{row.cilindradaouCapacidadeBateria}</td>
+                <td>{row.potencia}</td>
+                <td>{row.tipoCaixa}</td>
+                <td>{row.Nportas}</td>
+                <td style={{textAlign:'center'}}><img src={'fotos/' + row.foto}
+                    alt={'foto do ' + row.marca}
                     height="150" width="120"/>
                 </td>
-                <td style={{textAlign: 'justify'}}><br></br><br></br>{row.descricao}</td>
-                <td style={{textAlign:'center'}}><br></br><br></br>{row.realizador}</td>
-                <td style={{textAlign:'center'}}><br></br><br></br>{row.elenco}</td>
-                <td style={{textAlign:'center'}}><br></br><br></br>{row.duracao}</td>
-                <td style={{textAlign:'center'}}><br></br><br></br>{row.pontuacao}</td>
                 <td style={{textAlign:'center'}}>
-                <br></br><br></br>
-                <a href={row.link}>
-                    <img src="fotos/linke.png"
-                    alt={row.link}
-                    height="40" width="40"/>
-                </a>
-                </td>
-                <td style={{textAlign:'center'}}>
-                <br></br><br></br>
-                <button className="btn btn-danger" onClick={()=>props.filmeAremover(row)}>Eliminar</button>
+                <button className="btn btn-danger" onClick={()=>props.CarroAremover(row.id)}>Eliminar</button>
                 </td>
             </tr>
 
@@ -72,14 +65,14 @@ class Tabela extends React.Component {
 
         // estamos a ler os dados que são recebidos pelo componente
         // <=> this.props.dadosAlunos
-        const { inDadosFilmes, filmes } = this.props
+        const { inDadosCarros, car } = this.props
 
         return (
             <table className="table table-striped">
                 <CabecalhoTabela />
-                {/* o parâmetro 'dadosfilmes' irá receber
+                {/* o parâmetro 'dadosCarro' irá receber
                     os dados que vêm da componente 'mãe' */}
-                <CorpoTabela dadosDosFilmes={inDadosFilmes} filmeAremover={filmes} />
+                <CorpoTabela dadosDosCarros={inDadosCarros} CarroAremover={car} />
             </table>
         );
     }
