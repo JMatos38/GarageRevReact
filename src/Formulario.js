@@ -108,7 +108,7 @@ import React from 'react'
             Ano: this.state.ano,
             Potencia:this.state.potencia,
             TipoCaixa:this.state.tipoCaixa,
-            NPortas:this.state.nPortas
+            Nportas:this.state.nPortas
 
         };
 

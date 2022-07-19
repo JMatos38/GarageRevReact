@@ -75,7 +75,7 @@ class App extends React.Component{
     super(props);
     //nao se deve chamar o setState() no construtor, deve inicializar o state com o this.state
     this.state = {
-      //array q vai conter os dados do carro, vindos da API
+      /**array que vai conter os dados dos carros, vindos da APi */
       arrayCar: [],
       //armazena o estado da App
       loadState: "",
