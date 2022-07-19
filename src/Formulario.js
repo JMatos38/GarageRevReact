@@ -38,127 +38,60 @@ import React from 'react'
             marca: evento.target.value
         });
     }
-
-
-    /**
-     * processar os dados fornecidos pelo utilizador sobre o modelo do Carro
-     * @param {*} evento - dados adicionados pelo utilizador 
-     * 
-     */
      handlerModeloChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
             modelo: evento.target.value
         });
     }
-
-    /**
-     * processar os dados fornecidos pelo utilizador sobre o nome do Filme
-     * @param {*} evento - dados adicionados pelo utilizador 
-     * 
-     */
      handlerVersaoChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
             versao: evento.target.value
         });
     }
-
-
-    /**
-     * processar os dados fornecidos pelo utilizador sobre o nome do Filme
-     * @param {*} evento - dados adicionados pelo utilizador 
-     * 
-     */
      handlerCombustivelChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
             combustivel: evento.target.value
         });
     }
-
-    /**
-     * processar os dados fornecidos pelo utilizador sobre o nome do Filme
-     * @param {*} evento - dados adicionados pelo utilizador 
-     * 
-     */
      handlerAnoChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
             ano: evento.target.value
         });
     }
-
-    /**
-     * processar os dados fornecidos pelo utilizador sobre o nome do Filme
-     * @param {*} evento - dados adicionados pelo utilizador 
-     * 
-     */
      handlerCilindradaouCapBateriaChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
             cilindradaouCapBateria: evento.target.value
         });
     }
-
-    /**
-     * processar os dados fornecidos pelo utilizador sobre o nome do Filme
-     * @param {*} evento - dados adicionados pelo utilizador 
-     * 
-     */
      handlerPotenciaChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
             potencia: evento.target.value
         });
     }
-
-    /**
-     * processar os dados fornecidos pelo utilizador sobre o nome do Filme
-     * @param {*} evento - dados adicionados pelo utilizador 
-     * 
-     */
      handlerTipoCaixaChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
             tipoCaixa: evento.target.value
         });
     }
-
-    /**
-     * processar os dados fornecidos pelo utilizador sobre o nome do Filme
-     * @param {*} evento - dados adicionados pelo utilizador 
-     * 
-     */
      handlerNportaChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
             nPortas: evento.target.value
         });
     }
-
-
-    /**
-     * processar os dados fornecidos pelo utilizador sobre o nome do Filme
-     * @param {*} evento - dados adicionados pelo utilizador 
-     * 
-     */
-
-    /**
-     * processar os dados fornecidos pelo utilizador no upload da foto do Filme
-     * @param {} evento - dados adicionados pelo utilizador
-     */
     handlerFotoChange = (evento) => {
         //guardar os dados recolhidos 
         this.setState({
             foto: evento.target.files[0]
         });
     }
-
-    /**
-     * handler para processar os dados fornecidos pelo Formulário
-     * @param {*} evento 
-     */
     handlerSubmitForm = (evento) =>{
         //impedir o formulário de autoenviar os dados para o servidor
         //essa tarefa cabe ao componente App.js
@@ -175,7 +108,7 @@ import React from 'react'
             Ano: this.state.ano,
             Potencia:this.state.potencia,
             TipoCaixa:this.state.tipoCaixa,
-            NPortas:this.state.nPortas
+            Nportas:this.state.nPortas
 
         };
 
@@ -190,27 +123,21 @@ import React from 'react'
 
         return(
             //o 'return' só consegue devolver um objeto
-            <form onSubmit={this.handlerSubmitForm} encType="multipart/form-data">
+            <form method="POST" onSubmit={this.handlerSubmitForm} encType="multipart/form-data">
                 <div className="row">
                 <div className="col-md-4">
-                        {/* Filme: <EscolheFilme inListaFilmes={inDadosFilmes}
-                        outIdFilmeEscolhido={this.handlerFilmeChange}/><br /> */}
                         Marca: <input type="text"
                                 value={this.state.marca}
                                 onChange={this.handlerMarcaChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                 </div>
                 <div className="col-md-4">
-                        {/* Filme: <EscolheFilme inListaFilmes={inDadosFilmes}
-                        outIdFilmeEscolhido={this.handlerFilmeChange}/><br /> */}
                         Modelo: <input type="text"
                                 value={this.state.modelo}
                                 onChange={this.handlerModeloChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                 </div>
                 <div className="col-md-4">
-                        {/* Filme: <EscolheFilme inListaFilmes={inDadosFilmes}
-                        outIdFilmeEscolhido={this.handlerFilmeChange}/><br /> */}
                         Versao: <input type="text"
                                 value={this.state.versao}
                                 onChange={this.handlerVersaoChange}
@@ -255,14 +182,13 @@ import React from 'react'
                 </div>
                 <div className="col-md-4">
                         Nportas: <input type="text"
-                            
                             value={this.state.nPortas}
                             onChange={this.handlerNportaChange}
                             className="form-control btn btn-outline-secondary" /><br/>
                 </div>
                 </div>
                 <br></br>
-                    <input type="submit" value="Adicionar Carro" className="btn btn-primary" size="lg"/><br /><br /> 
+                    <input type="submit" value="Adicionar Carro" className="btn btn-primary"/><br /><br /> 
             </form>
             
         )
