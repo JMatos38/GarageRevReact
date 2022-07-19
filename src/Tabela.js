@@ -12,13 +12,13 @@ function CabecalhoTabela() {
                 <th style={{textAlign:'center'}}>Marca</th>
                 <th style={{textAlign:'center'}}>Modelo</th>
                 <th style={{textAlign:'center'}}>Versao</th>
-                <th style={{textAlign:'center'}}>Foto</th>
-                <th style={{textAlign:'center'}}>Ano</th>
                 <th style={{textAlign:'center'}}>Combustivel</th>
+                <th style={{textAlign:'center'}}>Ano</th>
                 <th style={{textAlign:'center'}}>cilindrada/Cap.Bateria</th>
                 <th style={{textAlign:'center'}}>Potencia</th>
                 <th style={{textAlign:'center'}}>Tipo de Caixa</th>
                 <th style={{textAlign:'center'}}>Numero de Portas</th>
+                <th style={{textAlign:'center'}}>Foto</th>
                 <th style={{textAlign:'center'}}></th>
             </tr>
         </thead>
@@ -30,18 +30,19 @@ function CabecalhoTabela() {
 const CorpoTabela = (props) => {
     // esta função 'interna' irá ler e processar todos
     // os objetos definidos dentro do array 'dadosDosFilmes'
+
     const rows = props.dadosDosCarros.map((row) => {
         return (
             <tr key={row.id}>
-                <td>{row.marca}</td>
-                <td>{row.modelo}</td>
-                <td>{row.versao}</td>
-                <td>{row.ano}</td>
-                <td>{row.combustivel}</td>
-                <td>{row.cilindradaouCapacidadeBateria}</td>
-                <td>{row.potencia}</td>
-                <td>{row.tipoCaixa}</td>
-                <td>{row.Nportas}</td>
+                <td style={{textAlign:'center'}} >{row.marca}</td>
+                <td style={{textAlign:'center'}}>{row.modelo}</td>
+                <td style={{textAlign:'center'}}>{row.versao}</td>
+                <td style={{textAlign:'center'}}>{row.combustivel}</td>
+                <td style={{textAlign:'center'}}>{row.ano}</td>
+                <td style={{textAlign:'center'}}>{row.cilindradaouCapacidadeBateria} cm3/Kwh</td>
+                <td style={{textAlign:'center'}}>{row.potencia} cv</td>
+                <td style={{textAlign:'center'}}>{row.tipoCaixa}</td>
+                <td style={{textAlign:'center'}}>{row.Nportas}</td>
                 <td style={{textAlign:'center'}}><img src={'fotos/' + row.foto}
                     alt={'foto do ' + row.marca}
                     height="150" width="120"/>
@@ -65,14 +66,14 @@ class Tabela extends React.Component {
 
         // estamos a ler os dados que são recebidos pelo componente
         // <=> this.props.dadosAlunos
-        const { inDadosCarros, car } = this.props
+        const { inDadosCarros, carros } = this.props
 
         return (
             <table className="table table-striped">
                 <CabecalhoTabela />
                 {/* o parâmetro 'dadosCarro' irá receber
                     os dados que vêm da componente 'mãe' */}
-                <CorpoTabela dadosDosCarros={inDadosCarros} CarroAremover={car} />
+                <CorpoTabela dadosDosCarros={inDadosCarros} CarroAremover={carros} />
             </table>
         );
     }

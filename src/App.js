@@ -1,5 +1,6 @@
-import React from 'react';
+//App.js
 
+import React from 'react';
 import Tabela from './Tabela';
 import Formulario from './Formulario';
 
@@ -7,7 +8,7 @@ async function getAllCarros(){
   //ler os dados da api
   //https://create-react-app.dev/docs/proxying-api-requests-in-development/
 
-  let carrosData = await fetch("api/API/");
+  let carrosData = await fetch("api/CarrosAPI/");
   //se a Data estiver errada
   if(!carrosData.ok){
     console.error(carrosData);
@@ -21,21 +22,21 @@ async function getAllCarros(){
 //
 //
 //
-async function addCarro(car){
+async function addCarro(dadosNovoCarro){
 
   let formdados = new FormData();
-  formdados.append("Marca",car.Marca);
-  formdados.append("Modelo",car.Modelo);
-  formdados.append("Versão",car.Versao);
-  formdados.append("Combustivel",car.Combustivel);
-  formdados.append("Ano",car.Ano);
-  formdados.append("Cilindrada/CapacidadeBateria",car.CilindradaouCapacidadeBateria);
-  formdados.append("Potencia",car.Potencia);
-  formdados.append("TipoCaixa",car.TipoCaixa);
-  formdados.append("Numero Portas",car.Nportas);
-  formdados.append("Foto",car.Foto);
+  formdados.append("Marca",dadosNovoCarro.Marca);
+  formdados.append("Modelo",dadosNovoCarro.Modelo);
+  formdados.append("Versão",dadosNovoCarro.Versao);
+  formdados.append("Combustivel",dadosNovoCarro.Combustivel);
+  formdados.append("Ano",dadosNovoCarro.Ano);
+  formdados.append("Cilindrada/CapacidadeBateria",dadosNovoCarro.CilindradaouCapacidadeBateria);
+  formdados.append("Potencia",dadosNovoCarro.Potencia);
+  formdados.append("TipoCaixa",dadosNovoCarro.TipoCaixa);
+  formdados.append("Numero Portas",dadosNovoCarro.Nportas);
+  formdados.append("Foto",dadosNovoCarro.Foto);
 
-  let resposta = await fetch("api/API/",{
+  let resposta = await fetch("api/CarrosAPI/",{
 
       method:"POST",
       body: formdados
@@ -49,11 +50,11 @@ async function addCarro(car){
   return await resposta.json();
 }
 
-async function removeCarro(car){
+async function removeCarro(dadosCarroaremover){
   let formData = new FormData();
-  formData.append("id", car.Id);
+  formData.append("id", dadosCarroaremover.Id);
   // send data to API
-  let resposta = await fetch("api/API/" + car.Id,
+  let resposta = await fetch("api/CarrosAPI/" + dadosCarroaremover.Id,
     {
       method: "DELETE",
       body: formData
@@ -93,7 +94,7 @@ class App extends React.Component{
       this.setState({loadState:"carregando dados"});
       let carrosFromAPI = await getAllCarros();
       // after receiving data, store it at state
-      this.setState({ carros: carrosFromAPI , loadState: "sucesso"})
+      this.setState({ arrayCar: carrosFromAPI , loadState: "sucesso"})
     } catch (ex) {
       this.setState({
         loadState:"erro",
@@ -142,7 +143,7 @@ class App extends React.Component{
 
   render() {
     //recuperar os dados do 'state' para usar dentro deste método
-    const { car } = this.state;
+    const { arrayCar } = this.state;
 
     //determinar o comportamento do 'componente', 
     //em função do seu estado
@@ -154,18 +155,18 @@ class App extends React.Component{
       case "sucesso":
         return (
           <div className="container">
-            <h1>Fotografia do Carro</h1>
+            <h1>Criar novo Carro</h1>
             {/* adição do Formulário que há-de recolher os dados da nova fotografia */}
-            <Formulario inDadosCarros={car} outDadosFotos={this.handlerAddCarro} />
+            <Formulario inDadosCarros={arrayCar} outDadosFotos={this.handlerAddCarro} />
 
             <div className="row">
               <div className="col-md-20">
                 <hr />
-                <h3>Tabela com os Carros</h3>
+                <h3>Tabela informativa (Carros) </h3>
                 {/* Tabela5 tem um 'parâmetro de entrada', chamado 'inDadosFotos'.
                 Neste caso, está a receber o array JSON com os dados das fotos dos carros,
                 lidos da API */}
-                <Tabela inDadosCarros={car} carros={this.handlerRemoveCarro} />
+                <Tabela inDadosCarros={arrayCar} carros={this.handlerRemoveCarro} />
               </div>
             </div>
           </div>
