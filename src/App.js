@@ -7,7 +7,7 @@ async function getAllCarros(){
   //ler os dados da api
   //https://create-react-app.dev/docs/proxying-api-requests-in-development/
 
-  let carrosData = await fetch("api/CarrosAPI/");
+  let carrosData = await fetch("api/API/");
   //se a Data estiver errada
   if(!carrosData.ok){
     console.error(carrosData);
@@ -35,10 +35,10 @@ async function addCarro(car){
   formdados.append("Numero Portas",car.Nportas);
   formdados.append("Foto",car.Foto);
 
-  let resposta = await fetch("api/CarrosAPI/",{
+  let resposta = await fetch("api/API/",{
 
       method:"POST",
-      body: FormData
+      body: formdados
     }
   );
   if(!resposta.ok){
@@ -53,7 +53,7 @@ async function removeCarro(car){
   let formData = new FormData();
   formData.append("id", car.Id);
   // send data to API
-  let resposta = await fetch("api/CarrosAPI/" + car.Id,
+  let resposta = await fetch("api/API/" + car.Id,
     {
       method: "DELETE",
       body: formData
@@ -72,13 +72,17 @@ class App extends React.Component{
   /**Construtor da classe */
   constructor(props){
     super(props);
-
+    //nao se deve chamar o setState() no construtor, deve inicializar o state com o this.state
     this.state = {
+      //array q vai conter os dados do carro, vindos da API
       arrayCar: [],
+      //armazena o estado da App
       loadState: "",
+      //guarda a msg de erro
       errorMessage : null
     }
   }
+
   componentDidMount(){
     this.LoadCarros();
   }
@@ -86,10 +90,10 @@ class App extends React.Component{
   async LoadCarros(){
     try {
       // ask for data, from API
-      this.setState({loadState:"Carregando carros"});
+      this.setState({loadState:"carregando dados"});
       let carrosFromAPI = await getAllCarros();
       // after receiving data, store it at state
-      this.setState({ carros: carrosFromAPI , loadState: "Concluido"})
+      this.setState({ carros: carrosFromAPI , loadState: "sucesso"})
     } catch (ex) {
       this.setState({
         loadState:"erro",
@@ -98,6 +102,8 @@ class App extends React.Component{
       console.error("Error: Não foi possível carregar carros data", ex)
     }
   }
+
+
   /**metodo que identifica o carro a ser removido @param {*} idCarro */
   handlerRemoveCarro = async (idCarro) => {
     try{
@@ -114,8 +120,10 @@ class App extends React.Component{
     }
     await this.LoadCarros();
   }
-  handlerDadosForm = async (newcarro) => {
-
+  handlerAddCarro = async (newcarro) => {
+    //read new carro data
+    //send it to API
+    //redraw the table
 
     try {
       await addCarro(newcarro);
@@ -148,7 +156,7 @@ class App extends React.Component{
           <div className="container">
             <h1>Fotografia do Carro</h1>
             {/* adição do Formulário que há-de recolher os dados da nova fotografia */}
-            <Formulario inDadosCarros={car} outDadosFotos={this.handlerDadosForm} />
+            <Formulario inDadosCarros={car} outDadosFotos={this.handlerAddCarro} />
 
             <div className="row">
               <div className="col-md-20">
