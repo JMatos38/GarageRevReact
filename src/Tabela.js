@@ -24,7 +24,7 @@
                  <th style={{textAlign:'center'}}>Potencia</th>
                  <th style={{textAlign:'center'}}>Tipo de Caixa</th>
                  <th style={{textAlign:'center'}}>Numero de Portas</th>
-                 <th style={{textAlign:'center'}}></th>
+                 <th style={{textAlign:'center'}}>Fotografia</th>
              </tr>
          </thead>
      )
