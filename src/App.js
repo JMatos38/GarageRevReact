@@ -8,8 +8,11 @@ import 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Container } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
 
+/**
+ * Função que irá ler os dados (animes) da API
+ * Working
+ */
 async function getAllCarros(){
   //ler os dados da api
   //https://create-react-app.dev/docs/proxying-api-requests-in-development/
@@ -28,6 +31,11 @@ async function getAllCarros(){
 //
 //
 //
+/**
+ * invoca a API e envia os dados do novo Anime
+ * @param {} dadosNovoAnime 
+ * notworking
+ */
 async function addCarro(dadosNovoCarro){
 
   let formdados = new FormData();
@@ -58,7 +66,7 @@ async function addCarro(dadosNovoCarro){
 
 async function removeCarro(dadosCarroaremover){
   let formData = new FormData();
-  formData.append("id", dadosCarroaremover.Id);
+  formData.append("IdCarro", dadosCarroaremover.IdCarro);
   // send data to API
   let resposta = await fetch("api/CarrosAPI/" + dadosCarroaremover.Id,
     {
@@ -97,10 +105,15 @@ class App extends React.Component{
   async LoadCarros(){
     try {
       // ask for data, from API
-      this.setState({loadState:"carregando dados"});
+      this.setState({
+        loadState:"carregando dados"
+      });
       let carrosFromAPI = await getAllCarros();
       // after receiving data, store it at state
-      this.setState({ arrayCar: carrosFromAPI , loadState: "sucesso"})
+      this.setState({
+         arrayCar: carrosFromAPI ,
+          loadState: "sucesso"
+        });
     } catch (ex) {
       this.setState({
         loadState:"erro",
@@ -136,6 +149,7 @@ class App extends React.Component{
       await addCarro(newcarro);
 
       //Ponto 3
+
       
     } catch (erro) {
       this.setState({
