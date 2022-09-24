@@ -14,17 +14,17 @@ class Formulario extends React.Component {
 
         //variáveis para guardar os dados introduzidos pelo utilizador, no formulário
         this.state = {
-            marca: "",
-            modelo: "",
-            versao: "",
-            foto: null,
-            combustivel: "",
-            ano: "",
-            cilindradaouCapBateria: "",
-            potencia: "",
-            tipoCaixa: "",
-            nPortas: ""
-        }
+            marca:"",
+            modelo:"",
+            versao:"",
+            combustivel:"",
+            ano:"",
+            cilindradaouCapacidadeBateria:"",
+            potencia:"",
+            tipoCaixa:"",
+            nPortas:"",
+            foto:null,
+        } 
     }
 
     /**
@@ -62,10 +62,10 @@ class Formulario extends React.Component {
             ano: evento.target.value
         });
     }
-    handlerCilindradaouCapBateriaChange = (evento) => {
+     handlerCilindradaouCapacidadeBateriaChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
-            cilindradaouCapBateria: evento.target.value
+            cilindradaouCapacidadeBateria: evento.target.value
         });
     }
     handlerPotenciaChange = (evento) => {
@@ -101,15 +101,15 @@ class Formulario extends React.Component {
         //podemos já enviar os dados prontos para serem adicionados à API
         let dadosFormulario = {
             Marca: this.state.marca,
-            UpFotografia: this.state.foto,
             Modelo: this.state.modelo,
             Versao: this.state.versao,
             Combustivel: this.state.combustivel,
+            CilindradaouCapacidadeBateria: this.state.cilindradaouCapacidadeBateria,
             Ano: this.state.ano,
             Potencia: this.state.potencia,
             TipoCaixa: this.state.tipoCaixa,
-            Nportas: this.state.nPortas
-
+            Nportas: this.state.nPortas,
+            Foto: this.state.foto,
         };
 
         //concretizar a exportação dos dados para a App.js
@@ -128,21 +128,18 @@ class Formulario extends React.Component {
                     <div className="row">
                         <div className="col-md-4">
                             Marca: <input type="text"
-                                required
                                 value={this.state.marca}
                                 onChange={this.handlerMarcaChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Modelo: <input type="text"
-                                required
                                 value={this.state.modelo}
                                 onChange={this.handlerModeloChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Versao: <input type="text"
-                                required
                                 value={this.state.versao}
                                 onChange={this.handlerVersaoChange}
                                 className="form-control btn btn-outline-secondary" /><br />
@@ -156,35 +153,30 @@ class Formulario extends React.Component {
                         </div>
                         <div className="col-md-4">
                             Ano: <input type="text"
-                                required
                                 value={this.state.ano}
                                 onChange={this.handlerAnoChange}
                                 className="form-control btn btn-outline-secondary" /><br /><br />
                         </div>
                         <div className="col-md-4">
                             Combustivel: <input type="text"
-                                required
                                 value={this.state.combustivel}
                                 onChange={this.handlerCombustivelChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Cilindrada/CapacidadeBateria: <input type="text"
-                                required
-                                value={this.state.cilindradaouCapBateria}
-                                onChange={this.handlerCilindradaouCapBateriaChange}
-                                className="form-control btn btn-outline-secondary" /><br />
+                                value={this.state.cilindradaouCapacidadeBateria}
+                                onChange={this.handlerCilindradaouCapacidadeBateriaChange}
+                                className="form-control btn btn-outline-secondary" /><br />  
                         </div>
                         <div className="col-md-4">
                             Potencia: <input type="text"
-                                required
                                 value={this.state.potencia}
                                 onChange={this.handlerPotenciaChange}
                                 className="form-control btn btn-outline-secondary" /><br /><br />
                         </div>
                         <div className="col-md-4">
                             TipoCaixa: <input type="text"
-                                required
                                 value={this.state.tipoCaixa}
                                 onChange={this.handlerTipoCaixaChange}
                                 className="form-control btn btn-outline-secondary" /><br /><br />
@@ -194,6 +186,13 @@ class Formulario extends React.Component {
                                 required
                                 value={this.state.nPortas}
                                 onChange={this.handlerNportaChange}
+                                className="form-control btn btn-outline-secondary" /><br/>
+                        </div>
+                        <div className="col-md-4">  
+                            Foto: <input type="file" 
+                                required
+                                accept=".jpg,.png,.JPG,.PNG"
+                                onChange={this.handlerFotoChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                     </div>
