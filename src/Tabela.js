@@ -2,24 +2,25 @@
 // ****************************************************** 
 
 import React from 'react'
+import Table from 'react-bootstrap/Table';
 
 // função que devolve o Cabeçalho da tabela
 function CabecalhoTabela() {
     return (
         <thead>
             <tr>
-                
-                <th style={{textAlign:'center'}}>Marca</th>
-                <th style={{textAlign:'center'}}>Modelo</th>
-                <th style={{textAlign:'center'}}>Versao</th>
-                <th style={{textAlign:'center'}}>Combustivel</th>
-                <th style={{textAlign:'center'}}>Ano</th>
-                <th style={{textAlign:'center'}}>cilindrada/Cap.Bateria</th>
-                <th style={{textAlign:'center'}}>Potencia</th>
-                <th style={{textAlign:'center'}}>Tipo de Caixa</th>
-                <th style={{textAlign:'center'}}>Numero de Portas</th>
-                <th style={{textAlign:'center'}}>Foto</th>
-                <th style={{textAlign:'center'}}></th>
+
+                <th style={{ textAlign: 'center' }}>Marca</th>
+                <th style={{ textAlign: 'center' }}>Modelo</th>
+                <th style={{ textAlign: 'center' }}>Versao</th>
+                <th style={{ textAlign: 'center' }}>Combustivel</th>
+                <th style={{ textAlign: 'center' }}>Ano</th>
+                <th style={{ textAlign: 'center' }}>cilindrada/Cap.Bateria</th>
+                <th style={{ textAlign: 'center' }}>Potencia</th>
+                <th style={{ textAlign: 'center' }}>Tipo de Caixa</th>
+                <th style={{ textAlign: 'center' }}>Numero de Portas</th>
+                <th style={{ textAlign: 'center' }}>Foto</th>
+                <th style={{ textAlign: 'center' }}></th>
             </tr>
         </thead>
     )
@@ -34,21 +35,21 @@ const CorpoTabela = (props) => {
     const rows = props.dadosDosCarros.map((row) => {
         return (
             <tr key={row.id}>
-                <td style={{textAlign:'center'}} >{row.marca}</td>
-                <td style={{textAlign:'center'}}>{row.modelo}</td>
-                <td style={{textAlign:'center'}}>{row.versao}</td>
-                <td style={{textAlign:'center'}}>{row.combustivel}</td>
-                <td style={{textAlign:'center'}}>{row.ano}</td>
-                <td style={{textAlign:'center'}}>{row.cilindradaouCapacidadeBateria} cm3/Kwh</td>
-                <td style={{textAlign:'center'}}>{row.potencia} cv</td>
-                <td style={{textAlign:'center'}}>{row.tipoCaixa}</td>
-                <td style={{textAlign:'center'}}>{row.Nportas}</td>
-                <td style={{textAlign:'center'}}><img src={'fotos/' + row.foto}
+                <td style={{ textAlign: 'center' }} >{row.marca}</td>
+                <td style={{ textAlign: 'center' }}>{row.modelo}</td>
+                <td style={{ textAlign: 'center' }}>{row.versao}</td>
+                <td style={{ textAlign: 'center' }}>{row.combustivel}</td>
+                <td style={{ textAlign: 'center' }}>{row.ano}</td>
+                <td style={{ textAlign: 'center' }}>{row.cilindradaouCapacidadeBateria} cm3/Kwh</td>
+                <td style={{ textAlign: 'center' }}>{row.potencia} cv</td>
+                <td style={{ textAlign: 'center' }}>{row.tipoCaixa}</td>
+                <td style={{ textAlign: 'center' }}>{row.nportas}</td>
+                <td style={{ textAlign: 'center' }}><img src={'fotos/' + row.foto}
                     alt={'foto do ' + row.marca}
-                    height="150" width="120"/>
+                    height="150" width="120" />
                 </td>
-                <td style={{textAlign:'center'}}>
-                <button className="btn btn-danger" onClick={()=>props.CarroAremover(row.id)}>Eliminar</button>
+                <td style={{ textAlign: 'center' }}>
+                    <button type="button" className="btn btn-outline-danger btn-rounded" onClick={() => props.CarroAremover(row)}>Eliminar</button>
                 </td>
             </tr>
 
@@ -64,16 +65,17 @@ const CorpoTabela = (props) => {
 class Tabela extends React.Component {
     render() {
 
+
         // estamos a ler os dados que são recebidos pelo componente
         // <=> this.props.dadosAlunos
-        const { inDadosCarros, carros } = this.props
+        const { inDadosCarros, arraycar } = this.props
 
         return (
-            <table className="table table-striped">
+            <table striped bordered hover>
                 <CabecalhoTabela />
                 {/* o parâmetro 'dadosCarro' irá receber
                     os dados que vêm da componente 'mãe' */}
-                <CorpoTabela dadosDosCarros={inDadosCarros} CarroAremover={carros} />
+                <CorpoTabela dadosDosCarros={inDadosCarros} CarroAremover={arraycar} />
             </table>
         );
     }

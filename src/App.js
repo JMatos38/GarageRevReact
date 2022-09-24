@@ -3,7 +3,16 @@
 import React from 'react';
 import Tabela from './Tabela';
 import Formulario from './Formulario';
+import './App.css';
+import 'react-bootstrap'
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { Container } from 'react-bootstrap';
 
+/**
+ * Função que irá ler os dados (animes) da API
+ * Working
+ */
 async function getAllCarros(){
   //ler os dados da api
   //https://create-react-app.dev/docs/proxying-api-requests-in-development/
@@ -22,6 +31,11 @@ async function getAllCarros(){
 //
 //
 //
+/**
+ * invoca a API e envia os dados do novo Anime
+ * @param {} dadosNovoAnime 
+ * notworking
+ */
 async function addCarro(dadosNovoCarro){
 
   let formdados = new FormData();
@@ -52,7 +66,7 @@ async function addCarro(dadosNovoCarro){
 
 async function removeCarro(dadosCarroaremover){
   let formData = new FormData();
-  formData.append("id", dadosCarroaremover.Id);
+  formData.append("IdCarro", dadosCarroaremover.IdCarro);
   // send data to API
   let resposta = await fetch("api/CarrosAPI/" + dadosCarroaremover.Id,
     {
@@ -75,7 +89,7 @@ class App extends React.Component{
     super(props);
     //nao se deve chamar o setState() no construtor, deve inicializar o state com o this.state
     this.state = {
-      //array q vai conter os dados do carro, vindos da API
+      /**array que vai conter os dados dos carros, vindos da APi */
       arrayCar: [],
       //armazena o estado da App
       loadState: "",
@@ -91,10 +105,15 @@ class App extends React.Component{
   async LoadCarros(){
     try {
       // ask for data, from API
-      this.setState({loadState:"carregando dados"});
+      this.setState({
+        loadState:"carregando dados"
+      });
       let carrosFromAPI = await getAllCarros();
       // after receiving data, store it at state
-      this.setState({ arrayCar: carrosFromAPI , loadState: "sucesso"})
+      this.setState({
+         arrayCar: carrosFromAPI ,
+          loadState: "sucesso"
+        });
     } catch (ex) {
       this.setState({
         loadState:"erro",
@@ -130,6 +149,7 @@ class App extends React.Component{
       await addCarro(newcarro);
 
       //Ponto 3
+
       
     } catch (erro) {
       this.setState({
@@ -154,19 +174,27 @@ class App extends React.Component{
         return <p>Ocorreu um erro: {this.state.errorMessage + '.' ?? "Não sabemos qual"}</p>
       case "sucesso":
         return (
-          <div className="container">
-            <h1>Criar novo Carro</h1>
-            {/* adição do Formulário que há-de recolher os dados da nova fotografia */}
-            <Formulario inDadosCarros={arrayCar} outDadosFotos={this.handlerAddCarro} />
+          <div>
+            <Navbar bg ="info" expand ="lg">
+              <Container>
+              <Navbar.Brand href="#home">GarageRevReact</Navbar.Brand>
+              </Container>
+            </Navbar>
+            <div className="container">
+              {/* adição do Formulário que há-de recolher os dados da nova fotografia */}
+              <Formulario inDadosCarros={arrayCar} outDadosFotos={this.handlerAddCarro} />
 
-            <div className="row">
-              <div className="col-md-20">
-                <hr />
-                <h3>Tabela informativa (Carros) </h3>
-                {/* Tabela5 tem um 'parâmetro de entrada', chamado 'inDadosFotos'.
-                Neste caso, está a receber o array JSON com os dados das fotos dos carros,
-                lidos da API */}
-                <Tabela inDadosCarros={arrayCar} carros={this.handlerRemoveCarro} />
+              <div className="row">
+                <div className="col-md-20">
+                  <hr />
+                  <h3>Tabela informativa (Carros) </h3>
+                  {/* Tabela5 tem um 'parâmetro de entrada', chamado 'inDadosFotos'.
+                  Neste caso, está a receber o array JSON com os dados das fotos dos carros,
+                  lidos da API */}
+                  
+                  <Tabela inDadosCarros={arrayCar} carros={this.handlerRemoveCarro} />
+                  
+                </div>
               </div>
             </div>
           </div>
