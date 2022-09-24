@@ -128,48 +128,56 @@ class Formulario extends React.Component {
                     <div className="row">
                         <div className="col-md-4">
                             Marca: <input type="text"
+                                required
                                 value={this.state.marca}
                                 onChange={this.handlerMarcaChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Modelo: <input type="text"
+                                required
                                 value={this.state.modelo}
                                 onChange={this.handlerModeloChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Versao: <input type="text"
+                                required
                                 value={this.state.versao}
                                 onChange={this.handlerVersaoChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Ano: <input type="text"
+                                required
                                 value={this.state.ano}
                                 onChange={this.handlerAnoChange}
                                 className="form-control btn btn-outline-secondary" /><br /><br />
                         </div>
                         <div className="col-md-4">
                             Combustivel: <input type="text"
+                                required
                                 value={this.state.combustivel}
                                 onChange={this.handlerCombustivelChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Cilindrada/CapacidadeBateria: <input type="text"
+                                required
                                 value={this.state.cilindradaouCapacidadeBateria}
                                 onChange={this.handlerCilindradaouCapacidadeBateriaChange}
                                 className="form-control btn btn-outline-secondary" /><br />  
                         </div>
                         <div className="col-md-4">
                             Potencia: <input type="text"
+                                required
                                 value={this.state.potencia}
                                 onChange={this.handlerPotenciaChange}
                                 className="form-control btn btn-outline-secondary" /><br /><br />
                         </div>
                         <div className="col-md-4">
                             TipoCaixa: <input type="text"
+                                required
                                 value={this.state.tipoCaixa}
                                 onChange={this.handlerTipoCaixaChange}
                                 className="form-control btn btn-outline-secondary" /><br /><br />
