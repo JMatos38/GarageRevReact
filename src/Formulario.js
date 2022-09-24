@@ -32,15 +32,60 @@ class Formulario extends React.Component {
      * @param {*} evento - dados adicionados pelo utilizador 
      * 
      */
-    handleAdd = (event) => {
-        // read the data available at 'event'
-        const { name, value } = event.target
-        // assign to the state identified by 'name' withe the 'value' writed by user
+    handlerMarcaChange = (evento) => {
+        //guardar os dados recolhidos
         this.setState({
-            [name]: value,
-        })
+            marca: evento.target.value
+        });
     }
-
+    handlerModeloChange = (evento) => {
+        //guardar os dados recolhidos
+        this.setState({
+            modelo: evento.target.value
+        });
+    }
+    handlerVersaoChange = (evento) => {
+        //guardar os dados recolhidos
+        this.setState({
+            versao: evento.target.value
+        });
+    }
+    handlerCombustivelChange = (evento) => {
+        //guardar os dados recolhidos
+        this.setState({
+            combustivel: evento.target.value
+        });
+    }
+    handlerAnoChange = (evento) => {
+        //guardar os dados recolhidos
+        this.setState({
+            ano: evento.target.value
+        });
+    }
+    handlerCilindradaouCapBateriaChange = (evento) => {
+        //guardar os dados recolhidos
+        this.setState({
+            cilindradaouCapBateria: evento.target.value
+        });
+    }
+    handlerPotenciaChange = (evento) => {
+        //guardar os dados recolhidos
+        this.setState({
+            potencia: evento.target.value
+        });
+    }
+    handlerTipoCaixaChange = (evento) => {
+        //guardar os dados recolhidos
+        this.setState({
+            tipoCaixa: evento.target.value
+        });
+    }
+    handlerNportaChange = (evento) => {
+        //guardar os dados recolhidos
+        this.setState({
+            nPortas: evento.target.value
+        });
+    }
     handlerFotoChange = (evento) => {
         //guardar os dados recolhidos 
         this.setState({
@@ -56,12 +101,12 @@ class Formulario extends React.Component {
         //podemos já enviar os dados prontos para serem adicionados à API
         let dadosFormulario = {
             Marca: this.state.marca,
-            UpFotografia: this.state.foto,
+            newfoto: this.state.foto,
             Modelo: this.state.modelo,
             Versao: this.state.versao,
             Combustivel: this.state.combustivel,
             Ano: this.state.ano,
-            CilindradaouCapBateria: this.state.cilindradaouCapBateria,
+            CilindradaouCapacidadeBateria: this.state.cilindradaouCapBateria,
             Potencia: this.state.potencia,
             TipoCaixa: this.state.tipoCaixa,
             Nportas: this.state.nPortas
@@ -69,17 +114,13 @@ class Formulario extends React.Component {
         };
 
         //concretizar a exportação dos dados para a App.js
-        this.props.outDadosnovo(dadosFormulario);
+        this.props.outDadosCarros(dadosFormulario);
     }
 
     render() {
         // ler os dados que foram/são fornecidos à Tabela5,
         // como parâmetro de entrada/saída
         //const { inDadosCarros } = this.props;
-        const { Marca, Modelo, Versao, Combustivel
-            , Ano, Potencia, TipoCaixa, Nportas, CilindradaouCapBateria } = this.state;
-
-
         return (
             <div >
                 <h1>Registo de um carro novo</h1>
@@ -91,31 +132,29 @@ class Formulario extends React.Component {
                         <div className="col-md-4">
                             Marca: <input type="text"
                                 required
-                                name="Marca"
-                                value={carroMarca}
-                                onChange={this.handleAdd}
+
+                                value={this.state.marca}
+                                onChange={this.handlerMarcaChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Modelo: <input type="text"
                                 required
-                                name="Modelo"
-                                value={carroModelo}
-                                onChange={this.handleAdd}
+                                value={this.state.modelo}
+                                onChange={this.handlerModeloChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Versao: <input type="text"
                                 required
                                 name="Versao"
-                                value={carroVersao}
-                                onChange={this.handleAdd}
+                                value={this.state.versao}
+                                onChange={this.handlerVersaoChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Foto: <input type="file"
                                 required
-                                name="Foto"
                                 accept=".jpg,.png,.JPG,.PNG"
                                 onChange={this.handlerFotoChange}
                                 className="form-control btn btn-outline-secondary" /><br />
@@ -123,49 +162,43 @@ class Formulario extends React.Component {
                         <div className="col-md-4">
                             Ano: <input type="text"
                                 required
-                                name="Ano"
-                                value={Ano}
-                                onChange={this.handleAdd}
+                                value={this.state.ano}
+                                onChange={this.handlerAnoChange}
                                 className="form-control btn btn-outline-secondary" /><br /><br />
                         </div>
                         <div className="col-md-4">
                             Combustivel: <input type="text"
                                 required
-                                name="Combustivel"
-                                value={Combustivel}
-                                onChange={this.handleAdd}
+                                value={this.state.combustivel}
+                                onChange={this.handlerCombustivelChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Cilindrada/CapacidadeBateria: <input type="text"
                                 required
-                                name
-                                value={CilindradaouCapBateria}
-                                onChange={this.handleAdd}
+                                value={this.state.cilindradaouCapBateria}
+                                onChange={this.handlerCilindradaouCapBateriaChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
                             Potencia: <input type="text"
                                 required
-                                name="Potencia"
-                                value={Potencia}
-                                onChange={this.handleAdd}
+                                value={this.state.potencia}
+                                onChange={this.handlerPotenciaChange}
                                 className="form-control btn btn-outline-secondary" /><br /><br />
                         </div>
                         <div className="col-md-4">
                             TipoCaixa: <input type="text"
                                 required
-                                name="TipoCaixa"
-                                value={TipoCaixa}
-                                onChange={this.handleAdd}
+                                value={this.state.tipoCaixa}
+                                onChange={this.handlerTipoCaixaChange}
                                 className="form-control btn btn-outline-secondary" /><br /><br />
                         </div>
                         <div className="col-md-4">
                             Nportas: <input type="text"
                                 required
-                                name="Nportas"
-                                value={Nportas}
-                                onChange={this.handleAdd}
+                                value={this.state.nPortas}
+                                onChange={this.handlerNportaChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                     </div>

@@ -40,10 +40,10 @@ const CorpoTabela = (props) => {
                 <td style={{ textAlign: 'center' }}>{row.versao}</td>
                 <td style={{ textAlign: 'center' }}>{row.combustivel}</td>
                 <td style={{ textAlign: 'center' }}>{row.ano}</td>
-                <td style={{ textAlign: 'center' }}>{row.cilindradaouCapacidadeBateria} cm3/Kwh</td>
+                <td style={{ textAlign: 'center' }}>{row.cilindradaouCapBateria} cm3/Kwh</td>
                 <td style={{ textAlign: 'center' }}>{row.potencia} cv</td>
                 <td style={{ textAlign: 'center' }}>{row.tipoCaixa}</td>
-                <td style={{ textAlign: 'center' }}>{row.nportas}</td>
+                <td style={{ textAlign: 'center' }}>{row.nPortas}</td>
                 <td style={{ textAlign: 'center' }}><img src={'fotos/' + row.foto}
                     alt={'foto do ' + row.marca}
                     height="150" width="120" />
@@ -54,7 +54,6 @@ const CorpoTabela = (props) => {
                     onClick={() => props.CarroAremover(row)}>Eliminar</button>
                 </td>
             </tr>
-
         )
     })
 
@@ -70,14 +69,15 @@ class Tabela extends React.Component {
 
         // estamos a ler os dados que são recebidos pelo componente
         // <=> this.props.dadosAlunos
-        const { inDadosCarros, carros } = this.props
+        const { inDadosCarros, carro } = this.props
 
         return (
             <table striped bordered hover>
                 <CabecalhoTabela />
                 {/* o parâmetro 'dadosCarro' irá receber
                     os dados que vêm da componente 'mãe' */}
-                <CorpoTabela dadosDosCarros={inDadosCarros} CarroAremover={carros} />
+                <CorpoTabela dadosDosCarros={inDadosCarros} 
+                CarroAremover={carro} />
             </table>
         );
     }
