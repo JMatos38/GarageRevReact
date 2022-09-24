@@ -13,15 +13,16 @@ import { Container } from 'react-bootstrap';
  * Função que irá ler os dados (animes) da API
  * Working
  */
-async function getAllCarros(){
+async function getAllCarros() {
   //ler os dados da api
   //https://create-react-app.dev/docs/proxying-api-requests-in-development/
 
   let carrosData = await fetch("api/CarrosAPI/");
   //se a Data estiver errada
-  if(!carrosData.ok){
+  if (!carrosData.ok) {
+    //ok, means HTTP code:200
     console.error(carrosData);
-    throw new Error("Não foi possível aceder a data dos carros.HTTP Code : ",carrosData.status);
+    throw new Error("Não foi possível aceder a data dos carros.HTTP Code : ", carrosData.status);
   }
   //senão retorna Data em JSON format
   return await carrosData.json();
@@ -36,35 +37,35 @@ async function getAllCarros(){
  * @param {} dadosNovoAnime 
  * notworking
  */
-async function addCarro(dadosNovoCarro){
+async function addCarro(dadosNovoCarro) {
 
   let formdados = new FormData();
-  formdados.append("Marca",dadosNovoCarro.Marca);
-  formdados.append("Modelo",dadosNovoCarro.Modelo);
-  formdados.append("Versão",dadosNovoCarro.Versao);
-  formdados.append("Combustivel",dadosNovoCarro.Combustivel);
-  formdados.append("Ano",dadosNovoCarro.Ano);
-  formdados.append("Cilindrada/CapacidadeBateria",dadosNovoCarro.CilindradaouCapacidadeBateria);
-  formdados.append("Potencia",dadosNovoCarro.Potencia);
-  formdados.append("TipoCaixa",dadosNovoCarro.TipoCaixa);
-  formdados.append("Numero Portas",dadosNovoCarro.Nportas);
-  formdados.append("Foto",dadosNovoCarro.Foto);
+  formdados.append("Marca", dadosNovoCarro.Marca);
+  formdados.append("Modelo", dadosNovoCarro.Modelo);
+  formdados.append("Versão", dadosNovoCarro.Versao);
+  formdados.append("Combustivel", dadosNovoCarro.Combustivel);
+  formdados.append("Ano", dadosNovoCarro.Ano);
+  formdados.append("Cilindrada/CapacidadeBateria", dadosNovoCarro.CilindradaouCapacidadeBateria);
+  formdados.append("Potencia", dadosNovoCarro.Potencia);
+  formdados.append("TipoCaixa", dadosNovoCarro.TipoCaixa);
+  formdados.append("Numero Portas", dadosNovoCarro.Nportas);
+  formdados.append("Foto", dadosNovoCarro.Foto);
 
-  let resposta = await fetch("api/CarrosAPI/",{
+  let resposta = await fetch("api/CarrosAPI/", {
 
-      method:"POST",
-      body: formdados
-    }
+    method: "POST",
+    body: formdados
+  }
   );
-  if(!resposta.ok){
-      console.error(resposta);
-      throw new Error("Não foi possível adicionar o carro.HTTP Code : ",resposta.status);
-    }
+  if (!resposta.ok) {
+    console.error(resposta);
+    throw new Error("Não foi possível adicionar o carro.HTTP Code : ", resposta.status);
+  }
   //senão retorna resposta em JSON format
   return await resposta.json();
 }
 
-async function removeCarro(dadosCarroaremover){
+async function removeCarro(dadosCarroaremover) {
   let formData = new FormData();
   formData.append("IdCarro", dadosCarroaremover.IdCarro);
   // send data to API
@@ -83,9 +84,9 @@ async function removeCarro(dadosCarroaremover){
 }
 /**Componente principal
 do projeto */
-class App extends React.Component{
+class App extends React.Component {
   /**Construtor da classe */
-  constructor(props){
+  constructor(props) {
     super(props);
     //nao se deve chamar o setState() no construtor, deve inicializar o state com o this.state
     this.state = {
@@ -94,52 +95,40 @@ class App extends React.Component{
       //armazena o estado da App
       loadState: "",
       //guarda a msg de erro
-      errorMessage : null
+      errorMessage: null
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.LoadCarros();
   }
 
-  async LoadCarros(){
+  async LoadCarros() {
     try {
       // ask for data, from API
       this.setState({
-        loadState:"carregando dados"
+        loadState: "carregando dados"
       });
       let carrosFromAPI = await getAllCarros();
       // after receiving data, store it at state
       this.setState({
-         arrayCar: carrosFromAPI ,
-          loadState: "sucesso"
-        });
+        arrayCar: carrosFromAPI,
+        loadState: "sucesso"
+      });
     } catch (ex) {
       this.setState({
-        loadState:"erro",
+        loadState: "erro",
         errorMessage: ex.tostring()
       });
       console.error("Error: Não foi possível carregar carros data", ex)
     }
   }
 
+/**
+   * send the new carro data to API
+   * @param {*} newcarro 
+   */
 
-  /**metodo que identifica o carro a ser removido @param {*} idCarro */
-  handlerRemoveCarro = async (idCarro) => {
-    try{
-      await removeCarro(idCarro);
-
-      
-    }catch(erro){
-      this.setState({
-        errorMessage: erro.tostring()
-        
-      });
-      console.error("Erro ao submeter os dados do novo carro", erro);
-
-    }
-    await this.LoadCarros();
-  }
   handlerAddCarro = async (newcarro) => {
     //read new carro data
     //send it to API
@@ -148,9 +137,9 @@ class App extends React.Component{
     try {
       await addCarro(newcarro);
 
-      //Ponto 3
-
       
+
+
     } catch (erro) {
       this.setState({
         errorMessage: erro.toString()
@@ -159,6 +148,26 @@ class App extends React.Component{
     }
     await this.LoadCarros();
     window.location.reload();
+  }
+
+  /**
+   * request the action to Delete the car that user choosed
+   * @param {*} idCarro 
+   */
+  handlerRemoveCarro = async (idCarro) => {
+    try {
+      await removeCarro(idCarro);
+
+
+    } catch (erro) {
+      this.setState({
+        errorMessage: erro.tostring()
+
+      });
+      console.error("Erro ao submeter os dados do novo carro", erro);
+
+    }
+    await this.LoadCarros();
   }
 
   render() {
@@ -175,14 +184,14 @@ class App extends React.Component{
       case "sucesso":
         return (
           <div>
-            <Navbar bg ="info" expand ="lg">
+            <Navbar bg="info" expand="lg">
               <Container>
-              <Navbar.Brand href="#home">GarageRevReact</Navbar.Brand>
+                <Navbar.Brand href="#home">GarageRevReact</Navbar.Brand>
               </Container>
             </Navbar>
             <div className="container">
               {/* adição do Formulário que há-de recolher os dados da nova fotografia */}
-              <Formulario inDadosCarros={arrayCar} outDadosFotos={this.handlerAddCarro} />
+              <Formulario inDadosCarros={arrayCar} outDadosnovo={this.handlerAddCarro} />
 
               <div className="row">
                 <div className="col-md-20">
@@ -191,9 +200,9 @@ class App extends React.Component{
                   {/* Tabela5 tem um 'parâmetro de entrada', chamado 'inDadosFotos'.
                   Neste caso, está a receber o array JSON com os dados das fotos dos carros,
                   lidos da API */}
-                  
+
                   <Tabela inDadosCarros={arrayCar} carros={this.handlerRemoveCarro} />
-                  
+
                 </div>
               </div>
             </div>

@@ -49,7 +49,9 @@ const CorpoTabela = (props) => {
                     height="150" width="120" />
                 </td>
                 <td style={{ textAlign: 'center' }}>
-                    <button type="button" className="btn btn-outline-danger btn-rounded" onClick={() => props.CarroAremover(row)}>Eliminar</button>
+                    <button type="button" 
+                    className="btn btn-outline-danger btn-rounded" 
+                    onClick={() => props.CarroAremover(row)}>Eliminar</button>
                 </td>
             </tr>
 
@@ -68,14 +70,14 @@ class Tabela extends React.Component {
 
         // estamos a ler os dados que são recebidos pelo componente
         // <=> this.props.dadosAlunos
-        const { inDadosCarros, arraycar } = this.props
+        const { inDadosCarros, carros } = this.props
 
         return (
             <table striped bordered hover>
                 <CabecalhoTabela />
                 {/* o parâmetro 'dadosCarro' irá receber
                     os dados que vêm da componente 'mãe' */}
-                <CorpoTabela dadosDosCarros={inDadosCarros} CarroAremover={arraycar} />
+                <CorpoTabela dadosDosCarros={inDadosCarros} CarroAremover={carros} />
             </table>
         );
     }
