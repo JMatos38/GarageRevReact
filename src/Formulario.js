@@ -17,13 +17,13 @@ import React from 'react'
             marca:"",
             modelo:"",
             versao:"",
-            foto:null,
             combustivel:"",
             ano:"",
-            cilindradaouCapBateria:"",
+            cilindradaouCapacidadeBateria:"",
             potencia:"",
             tipoCaixa:"",
-            nPortas:""
+            nPortas:"",
+            foto:null,
         } 
     }
 
@@ -62,10 +62,10 @@ import React from 'react'
             ano: evento.target.value
         });
     }
-     handlerCilindradaouCapBateriaChange = (evento) =>{
+     handlerCilindradaouCapacidadeBateriaChange = (evento) =>{
         //guardar os dados recolhidos
         this.setState({
-            cilindradaouCapBateria: evento.target.value
+            cilindradaouCapacidadeBateria: evento.target.value
         });
     }
      handlerPotenciaChange = (evento) =>{
@@ -101,15 +101,15 @@ import React from 'react'
         //podemos já enviar os dados prontos para serem adicionados à API
         let dadosFormulario = {
             Marca: this.state.marca,
-            UpFotografia: this.state.foto,
             Modelo: this.state.modelo,
             Versao: this.state.versao,
             Combustivel: this.state.combustivel,
+            CilindradaouCapacidadeBateria: this.state.cilindradaouCapacidadeBateria,
             Ano: this.state.ano,
             Potencia:this.state.potencia,
             TipoCaixa:this.state.tipoCaixa,
-            NPortas:this.state.nPortas
-
+            Nportas:this.state.nPortas,
+            Foto: this.state.foto,
         };
 
         //concretizar a exportação dos dados para a App.js
@@ -144,13 +144,6 @@ import React from 'react'
                                 className="form-control btn btn-outline-secondary" /><br />
                 </div>
                 <div className="col-md-4">  
-                        Foto: <input type="file" 
-                                        required
-                                        accept=".jpg,.png,.JPG,.PNG"
-                                        onChange={this.handlerFotoChange}
-                                        className="form-control btn btn-outline-secondary" /><br />  
-                </div>
-                <div className="col-md-4">  
                         Ano: <input type="text"
                                 value={this.state.ano}
                                 onChange={this.handlerAnoChange}
@@ -164,8 +157,8 @@ import React from 'react'
                 </div>
                 <div className="col-md-4">  
                         Cilindrada/CapacidadeBateria: <input type="text"
-                                value={this.state.cilindradaouCapBateria}
-                                onChange={this.handlerCilindradaouCapBateriaChange}
+                                value={this.state.cilindradaouCapacidadeBateria}
+                                onChange={this.handlerCilindradaouCapacidadeBateriaChange}
                                 className="form-control btn btn-outline-secondary" /><br />  
                 </div>
                 <div className="col-md-4">  
@@ -185,6 +178,13 @@ import React from 'react'
                             value={this.state.nPortas}
                             onChange={this.handlerNportaChange}
                             className="form-control btn btn-outline-secondary" /><br/>
+                </div>
+                <div className="col-md-4">  
+                        Foto: <input type="file" 
+                                        required
+                                        accept=".jpg,.png,.JPG,.PNG"
+                                        onChange={this.handlerFotoChange}
+                                        className="form-control btn btn-outline-secondary" /><br />  
                 </div>
                 </div>
                 <br></br>
