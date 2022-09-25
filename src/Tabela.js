@@ -15,9 +15,9 @@ function CabecalhoTabela() {
                 <th style={{ textAlign: 'center' }}>Versao</th>
                 <th style={{ textAlign: 'center' }}>Combustivel</th>
                 <th style={{ textAlign: 'center' }}>Ano</th>
-                <th style={{ textAlign: 'center' }}>Cilindrada/ Bateria</th>
+                <th style={{ textAlign: 'center' }}>cilindrada/Cap.Bateria</th>
                 <th style={{ textAlign: 'center' }}>Potencia</th>
-                <th style={{ textAlign: 'center' }}>Caixa</th>
+                <th style={{ textAlign: 'center' }}>Tipo de Caixa</th>
                 <th style={{ textAlign: 'center' }}>Numero de Portas</th>
                 <th style={{ textAlign: 'center' }}>Foto</th>
                 <th style={{ textAlign: 'center' }}></th>
@@ -40,7 +40,7 @@ const CorpoTabela = (props) => {
                 <td style={{ textAlign: 'center' }}>{row.versao}</td>
                 <td style={{ textAlign: 'center' }}>{row.combustivel}</td>
                 <td style={{ textAlign: 'center' }}>{row.ano}</td>
-                <td style={{ textAlign: 'center' }}>{row.cilindradaouCapacidadeBateria}</td>
+                <td style={{ textAlign: 'center' }}>{row.cilindradaouCapacidadeBateria} cm3/Kwh</td>
                 <td style={{ textAlign: 'center' }}>{row.potencia} cv</td>
                 <td style={{ textAlign: 'center' }}>{row.tipoCaixa}</td>
                 <td style={{ textAlign: 'center' }}>{row.nportas}</td>
@@ -49,11 +49,10 @@ const CorpoTabela = (props) => {
                     height="150" width="120" />
                 </td>
                 <td style={{ textAlign: 'center' }}>
-                    <button type="button" 
-                    className="btn btn-outline-danger btn-rounded" 
-                    onClick={() => props.CarroAremover(row)}>Eliminar</button>
+                    <button type="button" className="btn btn-outline-danger btn-rounded" onClick={() => props.CarroAremover(row)}>Eliminar</button>
                 </td>
             </tr>
+
         )
     })
 
@@ -69,15 +68,14 @@ class Tabela extends React.Component {
 
         // estamos a ler os dados que são recebidos pelo componente
         // <=> this.props.dadosAlunos
-        const { inDadosCarros, carro } = this.props
+        const { inDadosCarros, arraycar } = this.props
 
         return (
-            <table>
+            <table striped bordered hover>
                 <CabecalhoTabela />
                 {/* o parâmetro 'dadosCarro' irá receber
                     os dados que vêm da componente 'mãe' */}
-                <CorpoTabela dadosDosCarros={inDadosCarros} 
-                CarroAremover={carro} />
+                <CorpoTabela dadosDosCarros={inDadosCarros} CarroAremover={arraycar} />
             </table>
         );
     }
