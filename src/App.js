@@ -132,7 +132,7 @@ class App extends React.Component{
     try{
       await removeCarro(idCarro);
 
-      
+      await this.LoadCarros();
     }catch(erro){
       this.setState({
         errorMessage: erro.tostring()
@@ -141,7 +141,7 @@ class App extends React.Component{
       console.error("Erro ao submeter os dados do novo carro", erro);
 
     }
-    await this.LoadCarros();
+    window.location.reload();
   }
   handlerAddCarro = async (newcarro) => {
     //read new carro data
@@ -153,14 +153,14 @@ class App extends React.Component{
 
       //Ponto 3
 
-      
+      await this.LoadCarros();
     } catch (erro) {
       this.setState({
         errorMessage: erro.toString()
       });
       console.error("Erro ao submeter os dados do novo Carro; ", erro)
     }
-    await this.LoadCarros();
+    
     window.location.reload();
   }
 
