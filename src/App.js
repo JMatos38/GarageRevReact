@@ -3,9 +3,9 @@
 import React from 'react';
 import Tabela from './Tabela';
 import Formulario from './Formulario';
+import Table from 'react-bootstrap/Table';
 import './App.css';
 import 'react-bootstrap'
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Container } from 'react-bootstrap';
 
@@ -13,7 +13,7 @@ import { Container } from 'react-bootstrap';
  * Função que irá ler os dados (animes) da API
  * Working
  */
-async function getAllCarros(){
+async function getCarros(){
   //ler os dados da api
   //https://create-react-app.dev/docs/proxying-api-requests-in-development/
 
@@ -32,23 +32,23 @@ async function getAllCarros(){
 //
 //
 /**
- * invoca a API e envia os dados do novo Anime
- * @param {} dadosNovoAnime 
+ * invoca a API e envia os dados do novo Carro
+ * @param {} dadosNovoCarro 
  * notworking
  */
 async function addCarro(dadosNovoCarro){
-
+/* no formdados os nomes não estavam iguais logo o código não assimilava */
   let formdados = new FormData();
   formdados.append("Marca",dadosNovoCarro.Marca);
   formdados.append("Modelo",dadosNovoCarro.Modelo);
-  formdados.append("Versão",dadosNovoCarro.Versao);
+  formdados.append("Versao",dadosNovoCarro.Versao);
   formdados.append("Combustivel",dadosNovoCarro.Combustivel);
   formdados.append("Ano",dadosNovoCarro.Ano);
-  formdados.append("Cilindrada/CapacidadeBateria",dadosNovoCarro.CilindradaouCapacidadeBateria);
+  formdados.append("CilindradaouCapacidadeBateria",dadosNovoCarro.CilindradaouCapacidadeBateria);
   formdados.append("Potencia",dadosNovoCarro.Potencia);
   formdados.append("TipoCaixa",dadosNovoCarro.TipoCaixa);
-  formdados.append("Numero Portas",dadosNovoCarro.Nportas);
-  formdados.append("Foto",dadosNovoCarro.Foto);
+  formdados.append("Nportas",dadosNovoCarro.Nportas);
+  formdados.append("newfoto",dadosNovoCarro.newfoto);
 
   let resposta = await fetch("api/CarrosAPI/",{
 
@@ -57,6 +57,7 @@ async function addCarro(dadosNovoCarro){
     }
   );
   if(!resposta.ok){
+      console.log(resposta);
       console.error(resposta);
       throw new Error("Não foi possível adicionar o carro.HTTP Code : ",resposta.status);
     }
@@ -64,16 +65,18 @@ async function addCarro(dadosNovoCarro){
   return await resposta.json();
 }
 
-async function removeCarro(dadosCarroaremover){
+async function removeCarro(dadosCarroRemover){
   let formData = new FormData();
-  formData.append("IdCarro", dadosCarroaremover.IdCarro);
+  formData.append("id", dadosCarroRemover.id);
   // send data to API
-  let resposta = await fetch("api/CarrosAPI/" + dadosCarroaremover.Id,
+  let resposta = await fetch("api/CarrosAPI/" + dadosCarroRemover.id,
     {
       method: "DELETE",
       body: formData
-    })
+    });
+    console.log(resposta);
   if (!resposta.ok) {
+    console.log(resposta);
     console.error(resposta);
     throw new Error("Não foi possível remover o carro. Code: ", resposta.status)
   }
@@ -108,7 +111,7 @@ class App extends React.Component{
       this.setState({
         loadState:"carregando dados"
       });
-      let carrosFromAPI = await getAllCarros();
+      let carrosFromAPI = await getCarros();
       // after receiving data, store it at state
       this.setState({
          arrayCar: carrosFromAPI ,
@@ -129,7 +132,7 @@ class App extends React.Component{
     try{
       await removeCarro(idCarro);
 
-      
+      await this.LoadCarros();
     }catch(erro){
       this.setState({
         errorMessage: erro.tostring()
@@ -138,7 +141,7 @@ class App extends React.Component{
       console.error("Erro ao submeter os dados do novo carro", erro);
 
     }
-    await this.LoadCarros();
+    window.location.reload();
   }
   handlerAddCarro = async (newcarro) => {
     //read new carro data
@@ -150,14 +153,14 @@ class App extends React.Component{
 
       //Ponto 3
 
-      
+      await this.LoadCarros();
     } catch (erro) {
       this.setState({
         errorMessage: erro.toString()
       });
       console.error("Erro ao submeter os dados do novo Carro; ", erro)
     }
-    await this.LoadCarros();
+    
     window.location.reload();
   }
 
@@ -182,17 +185,19 @@ class App extends React.Component{
             </Navbar>
             <div className="container">
               {/* adição do Formulário que há-de recolher os dados da nova fotografia */}
-              <Formulario outDadosCarros={this.handlerAddCarro} />
+              <Formulario  
+              outDadosCarros={this.handlerAddCarro} />
 
               <div className="row">
                 <div className="col-md-20">
                   <hr />
-                  <h3>Tabela informativa (Carros) </h3>
+                  <h3>Tabela Carros </h3>
                   {/* Tabela5 tem um 'parâmetro de entrada', chamado 'inDadosFotos'.
                   Neste caso, está a receber o array JSON com os dados das fotos dos carros,
                   lidos da API */}
                   
-                  <Tabela inDadosCarros={arrayCar} carros={this.handlerRemoveCarro} />
+                  <Tabela inDadosCarros={arrayCar} 
+                  carro={this.handlerRemoveCarro} />
                   
                 </div>
               </div>
@@ -205,6 +210,5 @@ class App extends React.Component{
 
 }
 export default App;
-
 
 
