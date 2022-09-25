@@ -182,7 +182,7 @@ class App extends React.Component{
             </Navbar>
             <div className="container">
               {/* adição do Formulário que há-de recolher os dados da nova fotografia */}
-              <Formulario inDadosCarros={arrayCar} outDadosFotos={this.handlerAddCarro} />
+              <Formulario outDadosCarros={this.handlerAddCarro} />
 
               <div className="row">
                 <div className="col-md-20">
