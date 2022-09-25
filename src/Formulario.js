@@ -160,7 +160,7 @@ class Formulario extends React.Component {
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
-                            Ano: <input type="text"
+                            Ano: <input type="number"
                                 required
                                 value={this.state.ano}
                                 onChange={this.handlerAnoChange}
@@ -174,14 +174,14 @@ class Formulario extends React.Component {
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
-                            Cilindrada/CapacidadeBateria: <input type="text"
+                            Cilindrada/CapacidadeBateria: <input type="number"
                                 required
                                 value={this.state.cilindradaouCapBateria}
                                 onChange={this.handlerCilindradaouCapBateriaChange}
                                 className="form-control btn btn-outline-secondary" /><br />
                         </div>
                         <div className="col-md-4">
-                            Potencia: <input type="text"
+                            Potencia: <input type="number"
                                 required
                                 value={this.state.potencia}
                                 onChange={this.handlerPotenciaChange}
