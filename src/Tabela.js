@@ -43,7 +43,7 @@ const CorpoTabela = (props) => {
                 <td style={{ textAlign: 'center' }}>{row.cilindradaouCapBateria} cm3/Kwh</td>
                 <td style={{ textAlign: 'center' }}>{row.potencia} cv</td>
                 <td style={{ textAlign: 'center' }}>{row.tipoCaixa}</td>
-                <td style={{ textAlign: 'center' }}>{row.nPortas}</td>
+                <td style={{ textAlign: 'center' }}>{row.nportas}</td>
                 <td style={{ textAlign: 'center' }}><img src={'fotos/' + row.foto}
                     alt={'foto do ' + row.marca}
                     height="150" width="120" />
@@ -72,7 +72,7 @@ class Tabela extends React.Component {
         const { inDadosCarros, carro } = this.props
 
         return (
-            <table striped bordered hover>
+            <table bordered>
                 <CabecalhoTabela />
                 {/* o parâmetro 'dadosCarro' irá receber
                     os dados que vêm da componente 'mãe' */}

@@ -3,9 +3,9 @@
 import React from 'react';
 import Tabela from './Tabela';
 import Formulario from './Formulario';
+import Table from 'react-bootstrap/Table';
 import './App.css';
 import 'react-bootstrap'
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Container } from 'react-bootstrap';
 
@@ -57,6 +57,7 @@ async function addCarro(dadosNovoCarro){
     }
   );
   if(!resposta.ok){
+      console.log(resposta);
       console.error(resposta);
       throw new Error("Não foi possível adicionar o carro.HTTP Code : ",resposta.status);
     }
@@ -66,14 +67,16 @@ async function addCarro(dadosNovoCarro){
 
 async function removeCarro(dadosCarroRemover){
   let formData = new FormData();
-  formData.append("Id", dadosCarroRemover.Id);
+  formData.append("id", dadosCarroRemover.id);
   // send data to API
-  let resposta = await fetch("api/CarrosAPI/" + dadosCarroRemover.Id,
+  let resposta = await fetch("api/CarrosAPI/" + dadosCarroRemover.id,
     {
       method: "DELETE",
       body: formData
-    })
+    });
+    console.log(resposta);
   if (!resposta.ok) {
+    console.log(resposta);
     console.error(resposta);
     throw new Error("Não foi possível remover o carro. Code: ", resposta.status)
   }
