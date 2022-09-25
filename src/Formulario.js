@@ -154,7 +154,7 @@ class Formulario extends React.Component {
                         </div>
                         <div className="col-md-4">
                             Foto: <input type="file"
-                                required
+                                
                                 accept=".jpg,.png,.JPG,.PNG"
                                 onChange={this.handlerFotoChange}
                                 className="form-control btn btn-outline-secondary" /><br />
