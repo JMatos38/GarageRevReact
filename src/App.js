@@ -10,7 +10,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Container } from 'react-bootstrap';
 
 /**
- * Função que irá ler os dados (animes) da API
+ * Função que irá ler os dados da API
  * Working
  */
 async function getCarros(){
