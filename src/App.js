@@ -10,7 +10,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Container } from 'react-bootstrap';
 
 /**
- * Função que irá ler os dados (animes) da API
+ * Função que irá ler os dados da API
  * Working
  */
 async function getCarros(){
@@ -37,7 +37,6 @@ async function getCarros(){
  * notworking
  */
 async function addCarro(dadosNovoCarro){
-/* no formdados os nomes não estavam iguais logo o código não assimilava */
   let formdados = new FormData();
   formdados.append("Marca",dadosNovoCarro.Marca);
   formdados.append("Modelo",dadosNovoCarro.Modelo);
@@ -192,8 +191,8 @@ class App extends React.Component{
                 <div className="col-md-20">
                   <hr />
                   <h3>Tabela Carros </h3>
-                  {/* Tabela5 tem um 'parâmetro de entrada', chamado 'inDadosFotos'.
-                  Neste caso, está a receber o array JSON com os dados das fotos dos carros,
+                  {/* Tabela5 tem um 'parâmetro de entrada', chamado 'inDadosCarros'.
+                  Neste caso, está a receber o array JSON com os dados dos carros,
                   lidos da API */}
                   
                   <Tabela inDadosCarros={arrayCar} 

@@ -28,7 +28,7 @@ class Formulario extends React.Component {
     }
 
     /**
-     * processar os dados fornecidos pelo utilizador sobre o nome do Filme
+     * processar os dados fornecidos pelo utilizador sobre o nome do carro
      * @param {*} evento - dados adicionados pelo utilizador 
      * 
      */
