@@ -30,7 +30,7 @@ function CabecalhoTabela() {
 // faz exatamente o mesmo da linha 7
 const CorpoTabela = (props) => {
     // esta função 'interna' irá ler e processar todos
-    // os objetos definidos dentro do array 'dadosDosFilmes'
+    // os objetos definidos dentro do array 'dadosDosCarros'
 
     const rows = props.dadosDosCarros.map((row) => {
         return (
