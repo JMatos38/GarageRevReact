@@ -44,7 +44,7 @@ const CorpoTabela = (props) => {
                 <td style={{ textAlign: 'center' }}>{row.potencia} cv</td>
                 <td style={{ textAlign: 'center' }}>{row.tipoCaixa}</td>
                 <td style={{ textAlign: 'center' }}>{row.nportas}</td>
-                <td style={{ textAlign: 'center' }}><img src={'fotos/' + row.foto}
+                <td style={{ textAlign: 'center' }}><img src={'https://localhost:7054/Photos/' + row.foto}
                     alt={'foto do ' + row.marca}
                     height="150" width="120" />
                 </td>
